@@ -39,7 +39,7 @@ class Deliveroo {
         },
         responseType: 'json'
       });
-      this.setAccessToken(response.data.id, response.data.access_token);
+      this.setAccessToken(response.data.id, response.data.session_token);
       return response.data;
     } catch (error) {
       console.log('error', error);
@@ -60,7 +60,7 @@ class Deliveroo {
         },
         responseType: 'json'
       });
-      this.setAccessToken(response.data.id, response.data.access_token);
+      this.setAccessToken(response.data.id, response.data.session_token);
       return response.data;
     } catch (error) {
       console.log('error');
@@ -95,7 +95,7 @@ class Deliveroo {
       });
       return response.data;
     } catch (error) {
-      console.log('error');
+      console.log('error', error);
     }
   }
 
