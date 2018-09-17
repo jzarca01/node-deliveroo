@@ -30,7 +30,8 @@ class Deliveroo {
           client_type: "orderapp_ios",
           email: email,
           marketing_preferences: {
-            generic: "unchecked"
+            generic: false,
+            profile_based: false
           },
           first_name: faker.fake("{{name.firstName}}")
         },
@@ -61,6 +62,25 @@ class Deliveroo {
         responseType: 'json'
       });
       this.setAccessToken(response.data.id, response.data.session_token);
+      return response.data;
+    } catch (error) {
+      console.log('error');
+    }
+  }
+
+  async updateProfile(userId, {mobile = '', last_name, marketing_preferences = {}, first_name}) {
+    try {
+      let response = await this.request({
+        method: 'PATCH',
+        url: `/users/${userId}`,
+        data: {
+          mobile: mobile,
+          last_name: last_name,
+          marketing_preferences: marketing_preferences,
+          first_name: first_name
+        },
+        responseType: 'json'
+      });
       return response.data;
     } catch (error) {
       console.log('error');
