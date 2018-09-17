@@ -21,6 +21,12 @@ deliveroo.signUp(login, password)
 deliveroo.login(login, password);
 ```
 
+### Update profile
+
+```javascript
+deliveroo.updateProfile(userId, {mobile = '', last_name, marketing_preferences = {}, first_name});
+```
+
 ### Add a voucher to an account
 
 ```javascript
