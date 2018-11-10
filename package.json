@@ -1,6 +1,6 @@
 {
   "name": "node-deliveroo",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "An API Wrapper for Deliveroo",
   "main": "index.js",
   "scripts": {

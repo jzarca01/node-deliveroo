@@ -104,7 +104,12 @@ class Deliveroo {
    * @return {DeliverooUser} Updated user if update successful
    * @memberof Deliveroo
    */
-  async updateProfile(userId, {mobile = '', lastName, marketingPreferences = {}, firstName}) {
+  async updateProfile(userId, {
+    mobile = '',
+    lastName,
+    marketingPreferences = {},
+    firstName
+  }) {
     try {
       const response = await this.request({
         method: 'PATCH',
@@ -236,11 +241,11 @@ class Deliveroo {
     try {
       const restaurants = await this.getAvailableRestaurants(lat, lng);
       return [...restaurants
-          .filter((restaurant) => restaurant.menu.menu_tags.length > 0)
-          .map((restaurant) => restaurant.menu.menu_tags)
-          .reduce((acc, arr) => [...acc, ...arr], [])
-          .reduce((acc, elem) => acc.set(elem.id, elem), new Map())
-          .values()
+        .filter((restaurant) => restaurant.menu.menu_tags.length > 0)
+        .map((restaurant) => restaurant.menu.menu_tags)
+        .reduce((acc, arr) => [...acc, ...arr], [])
+        .reduce((acc, elem) => acc.set(elem.id, elem), new Map())
+        .values()
       ].sort((a, b) => a.id - b.id);
     } catch (error) {
       console.log('error');
@@ -324,7 +329,16 @@ class Deliveroo {
    * @return {Address} the savec addresse
    * @memberof Deliveroo
    */
-  async addSavedAddress(userId, {name, phone, address, postCode, country, userConfirmedCoordinates = false, lat, lng}) {
+  async addSavedAddress(userId, {
+    name,
+    phone,
+    address,
+    postCode,
+    country,
+    userConfirmedCoordinates = false,
+    lat,
+    lng
+  }) {
     try {
       const response = await this.request({
         method: 'POST',
@@ -392,6 +406,53 @@ class Deliveroo {
         responseType: 'json'
       });
       return response.data;
+    } catch (error) {
+      console.log('error', error);
+    }
+  }
+
+  /**
+   * Get Stripe tokens
+   *
+   * @return {Object}
+   * @memberof Deliveroo
+   */
+  async getStripeTokens() {
+    try {
+      const tokens = await this.request({
+        method: 'GET',
+        url: `/payment-providers/stripe/uk/client-tokens`,
+        data: {
+          client_type: 'orderapp_ios'
+        },
+        responseType: 'json'
+      });
+      return tokens.data;
+    } catch (error) {
+      console.log('error', error);
+    }
+  }
+
+  /**
+   * Add Stripe payment method to account
+   *
+   * @param {string} userId id of user
+   * @param {string} tokenId token id returned by Stripe
+   * @return {Object}
+   * @memberof Deliveroo
+   */
+  async addPaymentMethod(userId, tokenId) {
+    try {
+      const payment = await this.request({
+        method: 'POST',
+        url: `/users/${userId}/payment-tokens`,
+        data: {
+          nonce: tokenId,
+          provider: 'stripe'
+        },
+        responseType: 'json'
+      });
+      return payment.data;
     } catch (error) {
       console.log('error', error);
     }

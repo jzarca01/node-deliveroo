@@ -12,7 +12,7 @@ const deliveroo = new Deliveroo();
 ### Sign up
 
 ```javascript
-deliveroo.signUp(login, password)
+deliveroo.signUp(login, password);
 ```
 
 ### Log in
@@ -36,7 +36,7 @@ deliveroo.addVoucherToUser(userId, voucher);
 ### Get user order history
 
 ```javascript
-deliveroo.getHistory(userId)
+deliveroo.getHistory(userId);
 ```
 
 ### Get order details
@@ -60,36 +60,54 @@ deliveroo.getAvailableCategories(lat, lng);
 ### Get available restaurant in specific category
 
 ```javascript
-deliveroo.getAvailableRestaurantsInCategory(lat, lng, categoryId)
+deliveroo.getAvailableRestaurantsInCategory(lat, lng, categoryId);
 ```
 
 ### Get restaurant details
+
 ```javascript
 deliveroo.getRestaurantDetails(restaurantId);
 ```
 
 ### Get list of saved addresses
+
 ```javascript
-deliveroo.getSavedAddresses(userId)
+deliveroo.getSavedAddresses(userId);
 ```
 
 ### Add a new saved address
+
 ```javascript
-deliveroo.addSavedAddress(userId, {name, phone, address, postCode, country, userConfirmedCoordinates = 
+deliveroo.addSavedAddress(userId, {name, phone, address, postCode, country, userConfirmedCoordinates =
 false, lat, lng})
 ```
 
 ### Delete a saved address
+
 ```javascript
-deliveroo.deleteSavedAddress(userId, savedAddressId)
+deliveroo.deleteSavedAddress(userId, savedAddressId);
 ```
 
 ### Get list of payment methods available
+
 ```javascript
-deliveroo.getPaymentMethods(userId)
+deliveroo.getPaymentMethods(userId);
+```
+
+### Get Stripe tokens
+
+```javascript
+deliveroo.getStripeTokens();
+```
+
+### Add Stripe payment method to account
+
+```javascript
+delivero.addPaymentMethod(userId, tokenId);
 ```
 
 ### Delete a payment method
+
 ```javascript
-deliveroo.deletePaymentMethod(userId, paymentMethodId)
+deliveroo.deletePaymentMethod(userId, paymentMethodId);
 ```
