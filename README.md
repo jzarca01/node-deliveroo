@@ -24,7 +24,7 @@ deliveroo.login(login, password);
 ### Update profile
 
 ```javascript
-deliveroo.updateProfile(userId, {mobile = '', last_name, marketing_preferences = {}, first_name});
+deliveroo.updateProfile(userId, {mobile = '', lastName, marketingPreferences = {}, firstName});
 ```
 
 ### Add a voucher to an account
@@ -61,4 +61,35 @@ deliveroo.getAvailableCategories(lat, lng);
 
 ```javascript
 deliveroo.getAvailableRestaurantsInCategory(lat, lng, categoryId)
+```
+
+### Get restaurant details
+```javascript
+deliveroo.getRestaurantDetails(restaurantId);
+```
+
+### Get list of saved addresses
+```javascript
+deliveroo.getSavedAddresses(userId)
+```
+
+### Add a new saved address
+```javascript
+deliveroo.addSavedAddress(userId, {name, phone, address, postCode, country, userConfirmedCoordinates = 
+false, lat, lng})
+```
+
+### Delete a saved address
+```javascript
+deliveroo.deleteSavedAddress(userId, savedAddressId)
+```
+
+### Get list of payment methods available
+```javascript
+deliveroo.getPaymentMethods(userId)
+```
+
+### Delete a payment method
+```javascript
+deliveroo.deletePaymentMethod(userId, paymentMethodId)
 ```
