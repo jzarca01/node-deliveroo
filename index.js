@@ -267,6 +267,136 @@ class Deliveroo {
       console.log('error');
     }
   }
+
+  /**
+   * Get the current delivery addresses
+   * saved in the Deliveroo account
+   *
+   * @param {number} userId The Deliveroo user identifier
+   * @return {[Address]} An array of addresses
+   * @memberof Deliveroo
+   */
+  async getSavedAddresses(userId) {
+    try {
+      const response = await this.request({
+        method: 'GET',
+        url: `/users/${userId}/addresses`,
+        data: {
+          client_type: 'orderapp_ios'
+        },
+        responseType: 'json'
+      });
+      return response.data;
+    } catch (error) {
+      console.log('error', error);
+    }
+  }
+
+  /**
+   * Add a delivery addresses to
+   * save in the Deliveroo account
+   *
+   * @param {number} userId The Deliveroo user identifier
+   * @param {Address} address The address to save
+   * @return {Address} the savec addresse
+   * @memberof Deliveroo
+   */
+  async addSavedAddress(userId, {name, phone, address, postCode, country, userConfirmedCoordinates = false, lat, lng}) {
+    try {
+      const response = await this.request({
+        method: 'POST',
+        url: `/users/${userId}/addresses`,
+        data: {
+          post_code: postCode,
+          phone: phone,
+          country: country,
+          address1: address,
+          user_confirmed_coordinates: userConfirmedCoordinates,
+          label: name,
+          coordinates: [
+            lat,
+            lng
+          ]
+        },
+        responseType: 'json'
+      });
+      return response.data;
+    } catch (error) {
+      console.log('error');
+    }
+  }
+
+  /**
+   * Delete a delivery address saved
+   * in the Deliveroo account
+   *
+   * @param {number} userId The Deliveroo user identifier
+   * @param {number} savedAddressId The account saved address identifier
+   * @memberof Deliveroo
+   */
+  async deleteSavedAddress(userId, savedAddressId) {
+    try {
+      const response = await this.request({
+        method: 'DELETE',
+        url: `/users/${userId}/addresses/${savedAddressId}`,
+        data: {
+          client_type: 'orderapp_ios'
+        },
+        responseType: 'json'
+      });
+      return response.data;
+    } catch (error) {
+      console.log('error', error);
+    }
+  }
+
+  /**
+   * Get the current payment methods
+   * saved in the Deliveroo account
+   *
+   * @param {number} userId The Deliveroo user identifier
+   * @return {[PaymentMethod]} An array of payment methods
+   * @memberof Deliveroo
+   */
+  async getPaymentMethods(userId) {
+    try {
+      const response = await this.request({
+        method: 'GET',
+        url: `/users/${userId}/payment-tokens`,
+        data: {
+          client_type: 'orderapp_ios'
+        },
+        responseType: 'json'
+      });
+      return response.data;
+    } catch (error) {
+      console.log('error', error);
+    }
+  }
+
+  /**
+   * Delete a payment method saved
+   * in the Deliveroo account
+   *
+   * @param {number} userId The Deliveroo user identifier
+   * @param {number} paymentMethodId The account payment method identifier
+   * @memberof Deliveroo
+   */
+  async deletePaymentMethod(userId, paymentMethodId) {
+    try {
+      const response = await this.request({
+        method: 'DELETE',
+        url: `/users/${userId}/payment-tokens/${paymentMethodId}`,
+        data: {
+          client_type: 'orderapp_ios'
+        },
+        responseType: 'json'
+      });
+      return response.data;
+    } catch (error) {
+      console.log('error', error);
+    }
+  }
 }
 
 module.exports = Deliveroo;
