@@ -24,7 +24,7 @@ deliveroo.login(login, password);
 ### Update profile
 
 ```javascript
-deliveroo.updateProfile(userId, {mobile = '', last_name, marketing_preferences = {}, first_name});
+deliveroo.updateProfile(userId, {mobile = '', lastName, marketingPreferences = {}, firstName});
 ```
 
 ### Add a voucher to an account
