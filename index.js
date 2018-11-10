@@ -269,6 +269,29 @@ class Deliveroo {
   }
 
   /**
+   * Get restaurant details
+   *
+   * @param {number} restaurantId The Deliveroo restaurant identifier
+   * @return {Restaurant} A detailed restaurant object
+   * @memberof Deliveroo
+   */
+  async getRestaurantDetails(restaurantId) {
+    try {
+      const response = await this.request({
+        method: 'GET',
+        url: `/restaurants/${restaurantId}`,
+        data: {
+          client_type: 'orderapp_ios'
+        },
+        responseType: 'json'
+      });
+      return response.data.restaurants;
+    } catch (error) {
+      console.log('error');
+    }
+  }
+
+  /**
    * Get the current delivery addresses
    * saved in the Deliveroo account
    *
