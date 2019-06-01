@@ -1,6 +1,6 @@
 {
   "name": "node-deliveroo",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "An API Wrapper for Deliveroo",
   "main": "index.js",
   "scripts": {
@@ -9,7 +9,7 @@
   "author": "Jeremie Zarca",
   "license": "ISC",
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.19.0",
     "faker": "^4.1.0"
   },
   "devDependencies": {
